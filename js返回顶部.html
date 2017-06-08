@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>js返回顶部</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        .scroll-top{
+            position: fixed;
+            bottom:30px;
+            right: 20px;
+            width: 36px; height: 36px;
+            background: rgba(0,0,0,.7);
+            cursor: pointer;
+            display: none;
+        }
+        .content{
+            height: 2000px;
+            background: #496191;
+            color: #fff;
+            font-size: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        前端工程师
+    </div>
+    <div id="scroll-top" class="scroll-top"> </div>
+    <script>
+        !(function () {
+            var oTop = document.getElementById('scroll-top');
+            var timer = null;
+            window.onscroll = function () {
+
+                scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+
+                scrolltop >100? oTop.style.display = 'block':  oTop.style.display = 'none';
+            };
+
+            oTop.onclick = function () {
+               document.documentElement.scrollTop = document.body.scrollTop=0;
+
+            };
+
+           /* var oTop = document.getElementById("scroll-top");
+            var screenw = document.documentElement.clientWidth || document.body.clientWidth; //获取屏幕的宽度
+            var screenh = document.documentElement.clientHeight || document.body.clientHeight;//获取屏幕的高度
+            oTop.style.left = screenw - oTop.offsetWidth +"px";
+            oTop.style.top = screenh - oTop.offsetHeight + "px";
+            window.onscroll = function(){
+                var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+                oTop.style.top = screenh - oTop.offsetHeight + scrolltop +"px";
+            };
+            oTop.onclick = function(){
+                document.documentElement.scrollTop = document.body.scrollTop =0;
+            }*/
+        })();
+    </script>
+</body>
+</html>

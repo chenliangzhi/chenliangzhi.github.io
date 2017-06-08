@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>学习canvas标签属性</title>
+</head>
+<body>
+
+	<canvas id = 'myCanvas' width = "200" height="100" style="border: 1px solid #f60;">
+		
+		您的浏览器不支持canvas
+	</canvas>
+	<script type="text/javascript">
+
+		var c = document.getElementById("myCanvas");
+
+		var cxt = c.getContext("2d");
+
+		cxt.moveTo(10,10);
+
+		cxt.lineTo(150,50);
+		cxt.lineTo(10,50);
+		cxt.stroke();
+		cxt.fillStyle = '#F00';
+		//cxt.fillRect(0,0,150,75);
+		cxt.beginPath();
+		cxt.arc(70,18,15,0,Math.PI*2,true);
+		cxt.closePath();
+		cxt.fill();
+	</script>
+	
+
+
+</body>
+</html>

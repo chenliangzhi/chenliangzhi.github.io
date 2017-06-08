@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dsfdsf</title>
+	<style type="text/css">
+		*{padding: 0;margin:0;}
+		ul,ol{list-style: none;}
+		img{display: block;border: none;}
+		input,textarea,button{outline: none;}
+		a{text-decoration: none;}
+		body{background: #ddd;}
+		.wrap{width: 900px; margin: 50px auto;min-height: 500px;background: #fff;border: 1px solid #ccc;box-shadow: 2px 3px 2px #ddd;}
+		.main{margin:20px;}
+		.main:after{clear: both;}
+		textarea{resize: none;width:840px;height: 300px;padding: 10px;margin-bottom: 20px;}
+		.img{width: 50px;height: 50px;float: left;position: relative;}
+		.img img{position: absolute;top: 0;left: 0;display: none;cursor: pointer;}
+		.img .show{display: block;}
+		.btn{width: 120px;height: 40px;line-height: 40px;text-align: center;background: #f60;color:#fff;float: right;border-radius: 6px;cursor: pointer;}
+		.content{border-bottom: 1px dashed #f60; margin:20px 0;padding: 10px;overflow: hidden;}
+		.content img{float: left;width: 50px;height: 50px; margin-right: 10px;}
+		.content .text{float: left;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main" id='main'>
+			<textarea placeholder='请输入您想写的字' id='text'></textarea>
+			<div class="img" id='img'>
+				<img src="images/1.jpg" alt='' width='50' height='50' class='show'/>
+				<img src="images/2.jpg" alt='' width='50' height='50'/>
+			</div>
+			<div class="btn" id='btn'>发表</div>
+			<div style="clear:both;"></div>
+			<div id="vn">
+				
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			var oMain = document.getElementById('main');
+			var oTx = document.getElementById('text');
+			var oImg = document.getElementById('img');
+			var aImg = document.getElementsByTagName('img');
+			var oBtn = document.getElementById('btn');
+			var oVn = document.getElementById('vn');
+			var i = 1;
+			aImg[0].onclick = function(){
+				this.style.display = 'none';
+				aImg[1].style.display = 'block';
+				i = 2;
+			};
+
+			aImg[1].onclick = function(){
+				this.style.display = 'none';
+				aImg[0].style.display = 'block';
+				i = 1;
+			};
+
+			oBtn.onclick = function(){
+				if(oTx.value == ""){
+					alert("内容不能为空");
+				}else{
+					oVn.innerHTML += "<div class='content'><img src='images/"+i+".jpg' /><div class='text'>"+oTx.value+"</div></div>";
+					oTx.value = "";
+				}
+			};
+		}
+	</script>
+</body>
+</html>

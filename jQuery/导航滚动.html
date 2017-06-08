@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="anthony">
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <title>导航滚动</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        #box{
+            background: rgba(0,0,0,.5);
+            height: 50px;
+
+        }
+        #box li{
+            float:left;
+            width: 200px;
+            line-height: 50px;
+            color: #fff;
+            text-align: center;
+
+        }
+        #box li:hover{
+            background: #ff6600;
+        }
+        body{
+            height: 2000px;
+        }
+        .nav-scoll{
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: red;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+<ul id="box">
+    <li>首页</li>
+    <li>介绍</li>
+    <li>新闻</li>
+    <li>联系</li>
+</ul>
+<script src="js/jquery.min.js"></script>
+<script>
+    (function () {
+        $(window).on('scroll',function () {
+            var scrollTop = $(window).scrollTop();
+
+            if(scrollTop > 100){
+                console.log(111);
+                $('#box').addClass('nav-scoll');
+            }else {
+                $('#box').removeClass('nav-scoll');
+            }
+        })
+    })();
+</script>
+</body>
+</html>

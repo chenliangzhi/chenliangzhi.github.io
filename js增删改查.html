@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="anthony">
+    <meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+    <title>Title</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        .box{}
+        .box .left{width: 50%; height: 500px;float:left;background: #aaa;}
+        .box .left p{margin: 50px;color:red;font-weight: bold;}
+        .box .left p span{ display:inline-block;border: 1px solid #f60;margin: 20px 10px;padding: 10px;cursor: pointer;
+        color: #000;font-weight:normal;}
+        .box .left p span:hover{
+            background: #00a0e9;border: 1px solid #00a0e9;color: #fff;
+        }
+        .box .right{width: 50%; height: 500px;float:right;background: #eee;}
+
+        .div1{
+            border: 1px solid blue;
+            width:80px; height: 36px;
+            line-height: 36px;float: left;margin: 0 10px;
+        }
+        .div1 span{display: inline-block;width: 30%;box-sizing: border-box;text-align: center;}
+        .div1 span:first-child{
+            width: 70%;border-right: 1px solid blue;
+        }
+        .div1 span:last-child{
+            cursor: pointer;
+        }
+        .div2{border: 1px solid #ff6600;width:80px; height: 36px;
+            line-height: 36px;float: left;margin:20px 10px;}
+        .div2 span{display: inline-block;text-align:center;color: blue;width:100%;}
+    </style>
+</head>
+<body>
+    <div id="box" class="box">
+        <div class="left" id="left">
+            <p>经典课程：
+                <span>vue.js</span>
+                <span>react.js</span>
+                <span>html</span>
+                <span>css</span>
+                <span>js</span>
+                <span>jqeury</span>
+            </p>
+        </div>
+        <div class="right" id="right"></div>
+    </div>
+    <script>
+        (function () {
+            var oBox = document.getElementById('box'),
+                oLeft = document.getElementById('left'),
+                oRight = document.getElementById('right'),
+                oSpan = oLeft.getElementsByTagName('span'),
+                length = oSpan.length;
+
+            for (var i = 0; i < length; i++) {
+                oSpan[i].flag = true;
+                oSpan[i].onclick = function () {
+                    var  That = this;
+                    if(That.flag){
+                        var div1 = document.createElement('div'),
+                            span1 = document.createElement('span'),
+                            closed = document.createElement('span'),
+                            div2 = document.createElement('div'),
+                            span2 = document.createElement('span');
+                        div1.className = 'div1';
+                        div2.className = 'div2';
+                        span1.innerHTML = this.innerHTML;
+                        span2.innerHTML = this.innerHTML;
+                        closed.innerHTML = 'x';
+                        oLeft.appendChild(div1);
+                        div1.appendChild(span1);
+                        div1.appendChild(closed);
+                        oRight.appendChild(div2);
+                        div2.appendChild(span2);
+
+                        closed.onclick = function () {
+                            That.flag = true;
+                            this.parentNode.parentNode.removeChild(div1);
+                            div2.parentNode.removeChild(div2);
+                        };
+                        That.flag = false;
+                    }
+
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

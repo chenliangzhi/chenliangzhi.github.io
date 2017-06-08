@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>点击复制链接</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        input{outline: none;}
+        input[type='text']{margin: 10px; width: 200px; height: 36px;}
+        input[type='button']{margin: 10px; height: 36px;cursor: pointer;}
+        #copy-link{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input type="text" size="30" id="url" value="http://www.baidu.com/">
+        <input type="button" value="点击复制" id="copy-link" />
+    </div>
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="layer/layer.js"></script>
+    <script>
+
+        ~(function () {
+            var oBtn = document.getElementById('copy-link');
+            oBtn.onclick = function(){
+                oUrl = document.getElementById('url');
+                oUrl.select();
+                document.execCommand("Copy");
+                layer.msg('已复制，请粘贴');
+            };
+
+        })();
+    </script>
+</body>
+</html>

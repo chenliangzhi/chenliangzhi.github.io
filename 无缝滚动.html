@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="Fly">
+    <title>无缝滚动-向上滾動</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        .box_163css{width:126px; border:1px solid #d4d4d4; text-align:left; margin:20px auto; height:auto;}
+        .top{ background:#f8f8f8; text-align: center;line-height: 30px; height: 30px;}
+        .container{ width:122px; position:relative; overflow:hidden; height:600px;}
+        .box{ height:100%;width: 100%;margin-top: 10px;}
+        .box li{width:122px; height:92px;margin-bottom: 10px;}
+        .box img{ width:122px; height:92px; cursor:pointer;}
+    </style>
+</head>
+<body>
+<div class="box_163css">
+    <div class="top">无缝滚动</div>
+
+    <div class="container">
+        <ul id="box01" class="box">
+            <li><img src="images/banner1.jpg" /></li>
+            <li><img src="images/banner2.jpg" /></li>
+            <li><img src="images/banner3.jpg" /></li>
+            <li><img src="images/banner4.jpg" /></li>
+            <li><img src="images/banner5.jpg" /></li>
+            <li><img src="images/banner6.jpg" /></li>
+        </ul>
+        <ul id="box02" class="box"></ul>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var oBox = $('.container');
+            var timer = null;
+            $('#box02').html($('#box01').html());
+
+            function  start() {
+                timer = setInterval(function () {
+                    if(oBox.scrollTop()>$('#box01').height()){
+                        oBox.scrollTop(0);
+                    }else{
+                        oBox.scrollTop(oBox.scrollTop()+2);
+                    }
+                },100);
+            }
+
+            oBox.mouseenter(function(){
+                clearInterval(timer);
+            });
+            oBox.mouseleave(function(){
+                start();
+            });
+            start();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>多个活动倒计时</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        #box{width: 1170px; margin: 0 auto;}
+        #box ul{}
+        #box ul li{height: 100px;border-bottom: 1px solid #ddd;font-size: 24px;color: #333;line-height: 100px;}
+        #box ul li p{height: 100px;border-bottom: 1px solid #ddd;}
+        #box ul li p span{color: red;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li>
+                <p id="p1"></p>
+            </li>
+            <li>
+                <p id="p2"></p>
+            </li>
+            <li>
+                <p id="p3"></p>
+            </li>
+        </ul>
+    </div>
+    <script>
+        ~(function () {
+            var oP1 = document.getElementById('p1'),
+                oP2 = document.getElementById('p2'),
+                oP3= document.getElementById('p3');
+
+            function  timeDate() {
+                var oneEndTime = new Date(2018,1,16),
+                    twoEndTime = new Date(2017,5,7),
+                    threeEndTime = new Date(2017,9,1);
+
+                anthony(oneEndTime,oP1,'过年');
+                anthony(twoEndTime,oP2,'高考');
+                anthony(threeEndTime,oP3,'国庆');
+
+                return timeDate;
+            }
+
+            setInterval(timeDate(),1000);
+
+            function  zeroFill(num) {
+                return num<10?'0'+num:num;
+            }
+
+            function  anthony(EndTime, container, words) {
+
+                var d,h,m,s,
+                time =  EndTime.getTime() - new  Date().getTime();
+
+                if(time>0){
+                    d =Math.floor(time/1000/60/60/24);
+                    h =Math.floor(time/1000/60/60%24);
+                    m =Math.floor(time/1000/60%60);
+                    s =Math.floor(time/1000%60);
+                    container.innerHTML = '状态：距离'+words+'还有<span>'+zeroFill(d)+'天'+zeroFill(h)+'时'+zeroFill(m)+'分'+zeroFill(s)+'秒</span>';
+                }else {
+                    container.innerHTML = '<span>已结束</span>';
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

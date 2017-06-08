@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="anthony">
+    <meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+    <title>Title</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span id="span">https://www.baidu.com</span>
+        <input type="button" value="复制链接" id="btn">
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        $('#btn').click(function () {
+
+            var oSpan =  $('span');
+            var html = oSpan.text();
+            oSpan.select();
+            oSpan.execCommand("Copy");
+            console.log(html);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="anthony">
+    <meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+    <title>拖拽</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        #box{
+            position: absolute;left: 0;right: 0;
+            height: 100px; width: 100px;background: #ff6600;cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        var oBox = document.getElementById('box');
+
+        oBox.onmousedown  = function (ev) {
+            ev = ev ||window.event;
+
+            var xDown = ev.clientX;  //获取按下时，x坐标
+            var yDown = ev.clientY;  //获取按下时，y坐标
+
+            var leftDown = this.offsetLeft;  //按下时，获取当前left的值
+            var topDown = this.offsetTop;   //按下时，获取当前top的值
+
+            document.onmousemove = function (ev) {
+                ev = ev ||event;
+                var xMove = ev.clientX;  //获取移动时，当前x坐标
+                var yMove = ev.clientY;  //获取移动时，当前y坐标
+
+                var xV = xMove - xDown;  //得到当前坐标和初始坐标的变化量
+                var yV = yMove - yDown;
+
+                var maxL = document.documentElement.clientWidth - oBox.offsetWidth;
+                var maxT = document.documentElement.clientHeight - oBox.offsetHeight;
+
+                if (left > maxL || left< 0){
+                    left = Math .min(left,maxL);
+                    left = Math .max(left,0);
+                }
+                if (top > maxT || top< 0){
+                    top = Math .min(top,maxT);
+                    top = Math .max(top,0);
+                }
+                //因为盒子跟着鼠标动，所以鼠标坐标变化量就是盒子位置变化量
+                oBox.style.left = leftDown + xV + 'px';
+                oBox.style.top  = topDown + yV + 'px';
+
+            };
+            document.onmouseup = function () {
+                this.onmouseup = null;//注销抬起事件
+                this.onmousemove = null; //注销移动事件
+            };
+
+        }
+    </script>
+</body>
+</html>

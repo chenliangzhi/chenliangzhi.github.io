@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>Title</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+    </style>
+</head>
+<body>
+    <div id="box" v-text="'今年是'+year+'年'+month+'月'+day+'日'+hour+'时'+min+'分'+second+'秒'+minsecond+'毫秒'"></div>
+    <div id="demo" v-html="msg">
+
+    </div>
+    <div id="demo2">
+        <a  v-bind:href="href">
+            <img  v-bind:src="source" alt="">
+        </a>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        var app = new  Vue({
+            el:'#box',
+            data:{
+                year: new Date().getFullYear(),
+                month: new Date().getMonth()+1,
+                day: new Date().getDay(),
+                hour:new Date().getHours(),
+                min:new Date().getMinutes(),
+                second:new Date().getSeconds(),
+                minsecond:new Date().getMilliseconds()
+            }
+        });
+        var app2 =new Vue({
+            el:'#demo',
+            data:{
+
+                msg :'<img src ="images/banner1.jpg" />'
+
+            }
+        });
+        var app3 =new Vue({
+            el:'#demo2',
+            data:{
+                href:"https:www.baidu.com",
+                source:"images/banner2.jpg"
+            }
+        })
+    </script>
+</body>
+</html>

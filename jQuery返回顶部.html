@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>jQuery返回顶部</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        .scroll-top{
+            position: fixed;
+            bottom:30px;
+            right: 20px;
+            display: none;
+            width: 36px;
+            height: 36px;
+            background: rgba(0,0,0,.7);
+            color: #fff;
+            text-align: center;
+            font-size: 18px;
+            line-height: 36px;
+            cursor: pointer;
+        }
+        .content{
+            height: 2000px;
+            background: #496191;
+            color: #fff;
+            font-size: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    sssssdaf
+</div>
+<div id="scrollTop" class="scroll-top" title="返回顶部"> ☝</div>
+<script src="js/jquery-2.1.0.min.js"></script>
+<script>
+    
+    +(function () {
+        var  oTop = $('#scrollTop');
+
+        $(window).scroll(function() {
+            var scrolltop = $(window).scrollTop();
+           /* if(scrolltop>100){
+                oTop.fadeIn();
+            }else {
+                oTop.fadeOut();
+            }*/
+            scrolltop>100?oTop.fadeIn(): oTop.fadeOut();
+        });
+
+        oTop.click(function(){
+            $('html, body').animate({
+                scrollTop:0
+            },1000);
+        });
+
+    })();
+
+</script>
+</body>
+</html>

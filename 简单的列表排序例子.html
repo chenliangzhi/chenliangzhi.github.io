@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>Title</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        #ul1 {background:green;}
+        #ul2 {background:yellow;}
+    </style>
+</head>
+<body>
+<input id="btn1" type="button" value="排序" />
+<ul id="ul1">
+    <li>34</li>
+    <li>25</li>
+    <li>9</li>
+    <li>88</li>
+    <li>14</li>
+    <li>24</li>
+    <li>44</li>
+    <li>51</li>
+    <li>52</li>
+    <li>34</li>
+    <li>25</li>
+    <li>9</li>
+    <li>88</li>
+    <li>14</li>
+    <li>24</li>
+    <li>44</li>
+    <li>51</li>
+    <li>52</li>
+</ul>
+    <script>
+       /* var btn1=document.getElementById('btn1');
+        var ul1=document.getElementById('ul1');
+        oli=ul1.getElementsByTagName('li');
+        n=0;
+        btn1.onclick=function(){fa();}
+        function fa(){
+            for(var i=0;i<oli.length;i++){
+                for(var j=0;j<oli.length;j++){
+                    if(oli[i].innerHTML-oli[j].innerHTML<0){
+                        n=oli[i].innerHTML;
+                        oli[i].innerHTML=oli[j].innerHTML;
+                        oli[j].innerHTML=n;
+                    }
+                }
+            }
+        }*/
+
+        //方法二
+        var aa=document.getElementById('btn1');
+        aa.onclick=function(){
+            fun();
+        };
+
+        var bb=document.getElementsByTagName('li');
+        var cc=[];
+
+        function fun(){
+            for(var i=0;i<bb.length;i++){
+                cc[i]=Number(bb[i].innerHTML);
+            }
+            cc.sort(function(n1,n2){return n1-n2});
+                for(var i=0;i<bb.length;i++){
+                bb[i].innerHTML=String(cc[i]);
+            }
+       }
+
+       console.log(cc);
+    </script>
+</body>
+</html>

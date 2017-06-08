@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>活动倒计时</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        #box{
+            margin: 60px auto 0;text-align: center;font-size: 36px;
+        }
+        #box span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <p id="p"></p>
+    </div>
+    <script>
+        -(function () {
+
+            var oP= document.getElementById('p');
+            function start() {
+                var data = new Date(),//当前时间
+                    endTime = new  Date('2017,6,14'), //设置截止时间
+                    nowTime = data.getTime(),
+                    time = endTime.getTime()-nowTime,//时间差
+
+                    d,h,m,s;//定义变量 d,h,m,s保存倒计时的时间
+                if(time>0){
+                    d=Math.floor(time/1000/60/60/24);
+                    h=Math.floor(time/1000/60/60%24);
+                    m=Math.floor(time/1000/60%60);
+                    s=Math.floor(time/1000%60);
+                    oP.innerHTML ="距离活动结束还有<span >"+zeroFill(d)+"天"+zeroFill(h)+"时"+zeroFill(m)+"分"+zeroFill(s)+"秒</span>";
+                }else {
+                    oP.innerHTML ="<span >已结束</span>";
+                }
+                return start;
+            }
+
+            //定时器开启 1秒运行1次；
+            setInterval(start(),1000);
+
+            //判断天时分秒是否小于10，小于10前面自动补0；
+            function zeroFill(num) {
+                return num<10?'0'+num:num;
+            }
+        })();
+    </script>
+</body>
+</html>

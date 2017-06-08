@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="anthony">
+    <meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+    <title>一个小球碰撞边缘</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        .ball{
+            position: absolute;
+            left: 0;
+            top:0;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="ball"></div>
+    <script>
+        (function () {
+
+            var oBall = document.querySelector('.ball'),
+                leftVal = 5,topVal = 5;
+                oBall.style.background = randomColor();
+                var maxW = document.documentElement.clientWidth - oBall.offsetWidth;
+                var maxH = document.documentElement.clientHeight - oBall.offsetHeight;
+
+
+            window.onresize = function () {
+                 maxW = document.documentElement.clientWidth - oBall.offsetWidth;   //获取最大的宽度
+                 maxH = document.documentElement.clientHeight - oBall.offsetHeight; //获取最大的高度
+            };
+
+
+            play();
+            function play() {
+
+                var sLeft = oBall.offsetLeft, //获取当前的left值
+                    sTop = oBall.offsetTop, //获取当前的top值
+                    left = sLeft + leftVal,
+                    top = sTop + topVal;
+
+
+                if(left > maxW || left < 0){    //判断left的值
+                    left = Math.min(left,maxW);
+                    left= Math.max(left,0);
+                    leftVal = - leftVal;
+                    oBall.style.background = randomColor();
+                }
+
+                if(top > maxH || top < 0){   //判断top的值
+                    top = Math.min(top,maxH);
+                    top = Math.max(top,0);
+                    topVal = - topVal;
+                    oBall.style.background = randomColor();
+                }
+
+                oBall.style.left = leftVal + oBall.offsetLeft + 'px';
+                oBall.style.top = topVal + oBall.offsetTop + 'px';
+
+                requestAnimationFrame(play);
+            }
+
+            function randomColor() {
+                var r = Math.floor(Math.random()*256);
+                var g = Math.floor(Math.random()*256);
+                var b = Math.floor(Math.random()*256);
+
+                return "rgb("+r+","+g+","+b+")";
+            }
+
+            
+        })();
+
+
+        /*  if(left > maxW ){
+         left = maxW;
+         leftVal = - leftVal;
+         }
+         if(left < 0 ){
+         left = 0;
+         leftVal = - leftVal;
+         }
+         if(top > maxH){
+         top = maxH;
+         topVal = - topVal;
+         }
+         if(top < 0){
+         top = 0;
+         topVal = - topVal;
+         }*/
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>Title</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        input{outline: none;}
+        #box{width:348px; height:532px; background: #1a8b49; margin: 50px auto;border-radius:12px;padding: 25px;}
+        .make{ height: 30px; color: #fff;font-size: 16px; line-height:30px;}
+        .text{width:338px; height:80px;background: #fff;border-radius: 6px;text-align: right;
+        font-size: 20px;padding-right:10px;border: none;}
+        .calculator{width:100%; height:426px;}
+        .calculator li{float: left;width:60px; height:60px; line-height:60px;text-align: center;
+            border-radius:6px;background:#ff6600;color: #fff;font-size:16px;margin-right:12px;margin-top: 25px;
+        cursor: pointer;}
+        .calculator li:nth-child(5n){margin-right: 0;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="make">Anthony版计算器</div>
+        <input type="text" id="text" class="text" disabled/>
+        <ul class="calculator">
+            <li class="num">7</li>
+            <li class="num">8</li>
+            <li class="num">9</li>
+            <li class="back">←</li>
+            <li class="inverse">1/x</li>
+            <li class="num">4</li>
+            <li class="num">5</li>
+            <li class="num">6</li>
+            <li class="ride">*</li>
+            <li class="divide">/</li>
+            <li class="num">1</li>
+            <li class="num">2</li>
+            <li class="num">3</li>
+            <li class="add">+</li>
+            <li class="minus">-</li>
+            <li class="num">0</li>
+            <li class="num">.</li>
+            <li class="sqrt">√</li>
+            <li class="prevent">%</li>
+            <li class="equal">=</li>
+            <li class="opposite">+/-</li>
+            <li class="clear">清屏</li>
+            <li class="closed">关机</li>
+            <li class="open">开机</li>
+            <li class="like">点赞</li>
+        </ul>
+    </div>
+    <script>
+        window.onload = function () {
+            
+            var oNum = document.querySelectorAll('#box .calculator li.num'),
+                oInput = document.getElementById('text'),
+                oClear = document.querySelector('#box .calculator li.clear'),
+                oAdd = document.querySelector('#box .calculator li.add'),
+                oMinus = document.querySelector('#box .calculator li.minus'),
+                oRide = document.querySelector('#box .calculator li.ride'),
+                oDivide = document.querySelector('#box .calculator li.divide'),
+                oBack  = document.querySelector('#box .calculator li.back'),
+                oPoint = document.querySelector('#box .calculator li.point'),
+                oSqrt = document.querySelector('#box .calculator li.sqrt'),
+                oEqual = document.querySelector('#box .calculator li.equal'),
+                oInverse = document.querySelector('#box .calculator li.inverse'),
+                oPrevent = document.querySelector('#box .calculator li.prevent'),
+                oOpposite = document.querySelector('#box .calculator li.opposite'),
+                oLike = document.querySelector('#box .calculator li.like'),
+                oOpen = document.querySelector('#box .calculator li.open'),
+                oClosed = document.querySelector('#box .calculator li.closed'),
+                length = oNum.length;
+
+            oInput.value = '0'; //默认给input赋值0;
+            for ( var i = 0; i < length; i++) {
+                oNum[i].index = i;
+                oNum[i].onclick = function () {
+                    oInput.value += this.innerHTML;
+
+                }
+            }
+
+            //加号
+            oAdd.onclick = function () {
+                oInput.value += this.innerHTML;
+            };
+
+            //减号
+            oMinus.onclick = function () {
+                var flag=this.innerHTML;
+                if(oInput.value>=flag){
+                    alert('减号不能延续在一起');
+                }
+                oInput.value += this.innerHTML;
+            };
+
+            //乘
+            oRide.onclick = function () {
+                oInput.value += this.innerHTML;
+            };
+
+            //除
+            oDivide.onclick = function () {
+                oInput.value += this.innerHTML;
+            };
+
+            //清除
+            oClear.onclick = function () {
+                oInput.value = ''
+            };
+
+            //退格
+            oBack.onclick = function () {
+                length =oInput.value.length;
+                oInput.value = oInput.value.substring(0,length -1);
+            };
+
+            //百分号
+            oPrevent.onclick = function () {
+                oInput.value = (oInput.value)/100;
+            };
+
+            //开根号
+            oSqrt.onclick = function () {
+                oInput.value = Math.sqrt(oInput.value)
+            };
+
+            //等于
+            oEqual.onclick = function () {
+                oInput.value = eval(oInput.value);
+            };
+
+            //倒数
+            oInverse.onclick = function () {
+                var a = 1 / oInput.value;
+                if (oInput.value === '0') {
+                    a = '正无穷'
+                }
+                oInput.value = a;
+            };
+
+            //取反
+            oOpposite.onclick = function () {
+                if(oInput.value ===''){
+                    return;
+                }
+                var ifclick = true ;
+                if(ifclick){
+                    oInput.value = -oInput.value;
+                    ifclick = false ;
+                }else {
+                    oInput.value = +oInput.value;
+                    ifclick = true ;
+                }
+
+            };
+
+            //点赞
+            oLike.onclick = function () {
+
+                if(oInput.value === ''){
+                    oInput.value ='+'+1;
+                }else{
+                    var x = oInput.value;
+                    x = parseInt(x)+1;
+                    oInput.value ='+'+x;
+                }
+            };
+
+            //关机
+            oClosed.onclick = function () {
+                oInput.value = '';
+                oNum.disabled = false;
+            };
+
+            //开机
+            oOpen.onclick = function () {
+                oNum.disabled = true;
+            }
+
+        }
+    </script>
+</body>
+</html>

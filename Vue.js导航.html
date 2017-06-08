@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>Title</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        .nav{
+            margin: 100px auto 30px;
+            width: 655px;
+            overflow: hidden;
+        }
+        .nav li{
+            background: #5597b4;float: left;padding: 18px 30px;font-size: 18px;color: #fff;text-transform: uppercase;cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <ul class="nav" v-bind:class="[current]">
+        <li @click = "change('home')">home</li>
+        <li @click = "change('news')">news</li>
+        <li @click = "change('project')">project</li>
+        <li @click = "change('services')">services</li>
+        <li @click = "change('contact')">contact</li>
+    </ul>
+    <div>当前页面：{{current}}</div>
+</div>
+
+
+    <script src="js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#demo',
+            data:{
+                current:'home',
+            },
+            methods:{
+                change:function (cur) {
+                    this.current = cur;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

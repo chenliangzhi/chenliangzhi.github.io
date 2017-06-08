@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 实现弹幕效果</title>
+	<style type="text/css">
+		*{padding: 0;margin: 0;}
+		input,button{outline: none;}
+		.wrap{
+			width: 1180px; height: 800px;background: #e9e9e9;margin: 20px auto 0;position: relative;padding-top:20px;
+		}
+		.main{
+		 	width:1140px;height:700px;background:#000;margin:0 auto;border-radius:15px;position:relative;overflow:hidden;
+		 }
+		#text{width:900px; height: 40px;text-indent: 10px;}
+		#btn{height: 42px;width:100px;background: #f60;border: none;border: 1px solid #f60;cursor: pointer;color: #fff;font-size: 16px;}
+		input{margin:20px 20px 0;}
+		 .p{
+		 	height:30px;line-height:30px;position:absolute;top:0;left:1180px;font-weight:900;font-size: 30px;
+		 	width: 100%;
+		 }
+	</style>
+</head>
+<body>
+	
+<div class="wrap">
+	<div class="main" id="main">
+		
+	</div>
+	<input type="text" name="" id="text" placeholder="老司机带带我..........">
+	<input type="button" value="发送" id="btn">
+</div>
+
+<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+
+		var $val = $('#text').val();
+
+		var oText = $('<p></p>');
+		
+		oText.text($val); 
+
+		oText.addClass('p');
+
+		$('#text').val("");
+
+		//内容出现在屏幕中的随机高度
+		var oHeight = Math.floor(Math.random()*700);
+		//字体随机大小
+		var oFontSize = Math.floor(Math.random()*10)+16;
+		//字体随机颜色
+		var oRgb = "rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+		//随机内容在屏幕中出现的位置，字体大小，字体颜色
+		oText.css({
+			"top": oHeight,
+			"font-size":oFontSize,
+			"color":oRgb
+		});
+		//内容用append方法添加到屏幕div中
+		$("#main").append(oText);
+		//设置内容在屏幕中出现的的随机时间
+		var oTime = Math.ceil(Math.random()*5000)+3000;
+
+		oText.stop().animate({"left":"-700px"},oTime,function(){
+			$(this).remove();
+		});
+
+	});
+});
+</script>
+</body>
+</html>

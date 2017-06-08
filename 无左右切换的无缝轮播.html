@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="Anthony">
+    <title>js 左右切换无缝轮播</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        a{text-decoration:none;}
+        button ,input{outline:none;}
+        img{display:block;}
+        .banner{
+            position: relative;
+            overflow: hidden;
+            width:900px;
+            height:500px;
+            margin: 30px auto 0;
+        }
+        .banner .pic{ height: 100%;position: absolute;left: 0;top: 0;}
+        .banner .pic li{width:900px; height:100%;float: left;}
+        .banner .pic li img{width: 100%; height: 100%;}
+        .banner .list{width:180px;position: absolute;bottom: 10px;left: 50%;margin-left: -90px;}
+        .banner .list li{width:20px; height:20px;background: #fff;border-radius: 50%;margin: 0 5px;float: left;cursor: pointer;
+        text-align: center;line-height:20px;}
+        .banner .list li.active{background: #f60;}
+        .banner .prev,.banner .next{
+            position: absolute;
+            top:50%;
+            width: 36px; height: 50px;
+            margin-top: -25px;
+            background:rgba(0,0,0,0.5);
+            display: none;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .banner .prev{
+            left: 0;
+        }
+        .banner .next{
+            right: 0;
+        }
+        .banner:hover .prev,.banner:hover .next{
+            display: block;
+        }
+        .banner .prev:hover,.banner .next:hover{
+            background:rgba(0,0,0,1);
+        }
+    </style>
+</head>
+<body>
+<div class="banner" id="banner">
+    <ul class="pic" id="pic">
+        <li><img src="images/banner8.jpg" alt=""></li>
+        <li><img src="images/banner2.jpg" alt=""></li>
+        <li><img src="images/banner3.jpg" alt=""></li>
+        <li><img src="images/banner4.jpg" alt=""></li>
+        <li><img src="images/banner5.jpg" alt=""></li>
+        <li><img src="images/banner6.jpg" alt=""></li>
+    </ul>
+    <ul class="list" id="bannerList">
+
+    </ul>
+    <div class="prev" id="prev"> &lt</div>
+    <div class="next" id="next"> &gt</div>
+</div>
+<script>
+        (function () {
+            var oBanner = document.getElementById('banner'),
+                oPic = document.getElementById('pic'),
+                aPicLi = oPic.getElementsByTagName('li'),
+                bannerList = document.getElementById('bannerList'),
+                oPrev = document.getElementById('prev'),
+                oNext = document.getElementById('next');
+
+            //1.  ulLis[0].cloneNode(true)  克隆  节点
+            oPic.appendChild(aPicLi[0].cloneNode(true));
+            //获取类为pic的宽度
+            oPic.style.width = (aPicLi.length)*aPicLi[0].offsetWidth +'px';
+
+            //2. 插入 bannerList 里面的li
+            for(var i = 0; i <aPicLi.length-1; i++){
+
+                var li = document.createElement("li");
+                li.innerHTML = i + 1;  //显示数字
+                bannerList.appendChild(li);
+            }
+            // 3. 动画部分 遍历小圆点
+            var aListLi = bannerList.getElementsByTagName('li'),
+                index = 0;
+            aListLi[0].className = 'active';
+            for(i=0;i<aListLi.length;i++) {
+                aListLi[i].index = i;  // 赋予索引号
+                aListLi[i].onclick = function() {
+                    // 清除所有人
+                    for(var j=0;j<aListLi.length;j++) {
+                        aListLi[j].className = "";
+                    }
+                    this.className = 'active';
+                    animate(oPic,-index*aPicLi[0].offsetWidth);
+                    key = square = index; // 鼠标经过 key square 要等于 当前的索引号
+                }
+            }
+
+            // 4. 定时器部分  难点
+            var timer = null,
+                key = 0, // 用来控制图片的播放的
+                square = 0;  // 用来控制小方块的
+
+            timer = setInterval(autoplay,3000);   // 每隔3s 调用一次 autoplay
+            function autoplay() {
+                key++;   // key == 1  先 ++
+                //console.log(key); //  不能超过5
+                if(key >aPicLi.length - 1)
+                {
+                    // alert('停下');
+                    oPic.style.left = 0;
+                    key = 1;  // 因为第6张就是第一张，我们已经播放完毕了， 下一次播放第2张
+                    // 第2张的索引号是1
+                }
+                animate(oPic,-key*aPicLi[0].offsetWidth);
+
+                // 小方块的做法
+                square++;  // 小方块自加1
+                square = square > aListLi.length-1 ? 0 : square;
+                /// 清除所有人
+                for(i=0;i<aListLi.length;i++) {
+                    aListLi[i].className = "";
+                }
+                aListLi[square].className = "active";   // 留下当前自己的
+
+            }
+            //左边按钮
+            oPrev.onclick = function () {
+
+
+            };
+
+            //右边按钮
+            oNext.onclick = function () {
+
+            };
+
+            // 鼠标经过和停止定时器
+            oBanner.onmouseenter = function() {
+                clearInterval(timer);
+            };
+
+            oBanner.onmouseleave = function() {
+                timer = setInterval(autoplay,3000);  // 一定这么开
+            };
+
+            //  基本封装
+            function animate(obj,target) {
+                clearInterval(obj.timer);  // 要开启定时器，先清除以前定时器
+                // 有2个参数 第一个 对象谁做动画  第二 距离 到哪里
+                // 如果 offsetLeft 大于了  target 目标位置就应该反方向
+                var speed = obj.offsetLeft < target ? 15 : -15;
+                obj.timer = setInterval(function() {
+                    var result = target - obj.offsetLeft;  //  他们的值 等于 0 说明完全相等
+                    // 动画的原理
+                    obj.style.left = obj.offsetLeft + speed  + "px";
+                    if(Math.abs(result) <= 15) {
+                        obj.style.left = target + "px";   //抖动问题
+                        clearInterval(obj.timer);
+                    }
+                },10);
+            }
+        })();
+    </script>
+</body>
+</html>

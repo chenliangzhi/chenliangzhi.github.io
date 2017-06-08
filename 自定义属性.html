@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content=" ">
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        a{text-decoration: none;}
+        ul,li{list-style: none;}
+        body{font-size: 14px;font-family: "微软雅黑";}
+        div{
+            width: 200px;height: 100px;margin-bottom: 10px;text-align: center;line-height: 100px;
+            border: 1px solid #f60;
+        }
+    </style>
+</head>
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <script type="text/javascript">
+        var divDoms = document.getElementsByTagName("div");
+        //要给每个div添加 点击事件
+       /* divDoms[0].onclick = function(){
+            alert(1);
+        };
+        divDoms[1].onclick = function(){
+            alert(1);
+        };
+        divDoms[2].onclick = function(){
+            alert(1);
+        };
+        divDoms[3].onclick = function(){
+            alert(1);
+        }*/
+
+        //现在我想弹出对应的序号  就需要给每个div一个标识 这个标识就是在div对象地下放一个叫index的属性
+       /* divDoms[0].index = 0;
+        divDoms[0].onclick = function(){
+            alert(this.index);
+        };
+        divDoms[1].index = 1;
+        divDoms[1].onclick = function(){
+            alert(this.index);
+        };
+        divDoms[2].index = 2;
+        divDoms[2].onclick = function(){
+            alert(this.index);
+        };
+        divDoms[3].index = 3;
+        divDoms[3].onclick = function(){
+            alert(this.index);
+        };*/
+
+       //如果有1000个盒子 你不得写死去  所以用循环
+       for(var i=0;i<divDoms.length;i++){
+            //你要明白循环仅仅是为了 给所有的绑定点击事件 循环结束i=4; 我们还要和上边一样给div一个标识index
+            divDoms[i].index = i;
+            /*
+                相当于单独写了四个 循环目的你明确了 就明白了
+             */
+            divDoms[i].onclick = function(){
+                //同样我也要他的序号
+                alert(this.index)
+            }
+       }
+
+    </script>
+</body>
+</html>

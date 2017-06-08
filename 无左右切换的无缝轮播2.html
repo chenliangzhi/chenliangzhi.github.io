@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="Anthony">
+    <title>js 左右切换无缝轮播</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        a{text-decoration:none;}
+        button ,input{outline:none;}
+        img{display:block;}
+        .banner{
+            position: relative;
+            overflow: hidden;
+            width:900px;
+            height:500px;
+            margin: 30px auto 0;
+        }
+        .banner .pic{ height: 100%; position: absolute;left: 0;top: 0;}
+        .banner .pic li{width:900px; height:100%;float: left;}
+        .banner .pic li img{width: 100%; height: 100%;}
+        .banner .list{width: 156px;position: absolute;bottom: 10px;left: 50%;margin-left: -78px;}
+        .banner .list li{width: 16px; height: 16px;background: #fff;border-radius: 50%;margin: 0 5px;float: left;cursor: pointer;}
+        .banner .list li.active{background: #f60;}
+        .banner .prev,.banner .next{
+            position: absolute;
+            top:50%;
+            width: 36px; height: 50px;
+            margin-top: -25px;
+            background:rgba(0,0,0,0.5);
+            display: none;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .banner .prev{
+            left: 0;
+        }
+        .banner .next{
+            right: 0;
+        }
+        .banner:hover .prev,.banner:hover .next{
+            display: block;
+        }
+        .banner .prev:hover,.banner .next:hover{
+            background:rgba(0,0,0,1);
+        }
+    </style>
+</head>
+<body>
+<div class="banner" id="banner">
+    <ul class="pic" id="pic">
+        <li><img src="images/banner1.jpg" alt=""></li>
+        <li><img src="images/banner2.jpg" alt=""></li>
+        <li><img src="images/banner3.jpg" alt=""></li>
+        <li><img src="images/banner4.jpg" alt=""></li>
+        <li><img src="images/banner5.jpg" alt=""></li>
+        <li><img src="images/banner6.jpg" alt=""></li>
+        <li><img src="images/banner1.jpg" alt=""></li>
+    </ul>
+    <ul class="list" id="bannerList">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div class="prev" id="prev"> &lt; </div>
+    <div class="next" id="next"> &gt; </div>
+</div>
+<script>
+        (function () {
+            var oBanner = document.getElementById('banner'),
+                oPic = document.getElementById('pic'),
+                aPicLi = oPic.getElementsByTagName('li'),
+                bannerList = document.getElementById('bannerList'),
+                aListLi = bannerList.getElementsByTagName('li'),
+                oPrev = document.getElementById('prev'),
+                oNext = document.getElementById('next'),
+                length = aPicLi.length,
+                nowTime = 0,
+                baseWidth =aPicLi[0].offsetWidth,
+                index =0,
+                timer = null,
+                square = 0;
+
+            //获取类为pic的宽度
+            oPic.style.width = length*aPicLi[0].offsetWidth +'px';
+
+            //点击小圆点执行图片切换及原点变色
+            for (var i = 0; i < length; i++) {
+                aListLi[i].goudan = i;
+                aListLi[i].onclick = function(){
+                    if( new Date() - nowTime > 300){
+                        nowTime = new Date();
+                        aListLi[index].className = '';
+                        index = this.goudan;
+                        this.className = 'active';
+                        move(oPic,{
+                            left:-index*baseWidth
+                        },300);
+                    }
+                }
+            }
+            //自动执行动画
+            auto();
+            function auto() {
+                timer = setInterval(function () {
+                    suquer = index%length;
+                    aListLi[index].className = '';
+                    index ++;
+                    aListLi[suquer].className = 'active';
+                    move(oPic,{
+                        left:-index*baseWidth
+                    },300,function () {
+                        if(index ===6){
+                            oPic.style.left='0px';
+                            index =0;
+                        }
+                    });
+
+                },3000);
+            }
+
+
+            //左边按钮
+            oPrev.onclick = function () {
+                alert(111);
+            };
+
+            //右边按钮
+            oNext.onclick = function () {
+                move(oPic,{
+                    left:-index*baseWidth
+                },300,function () {
+                    if(index ===6){
+                        oPic.style.left='0px';
+                        index =0;
+                    }
+                });
+            };
+
+            //鼠标移入banner上停止动画
+            oBanner.onmouseenter = function () {
+                clearInterval(timer);
+            };
+            //鼠标离开banner上自动执行动画
+            oBanner.onmouseleave = auto;
+
+
+            function move(obj , mJson , time , callBack) {
+                var sVal = {}, //存初始值
+                    tVal = {}, //存目标值
+                    sTime = new Date(); //存初始时间
+                for (var key in mJson) {
+                    sVal[key] = parseFloat( getStyle(obj,key) );//获取初始值
+                    tVal[key] = parseFloat( mJson[key] );//将目标值转换为数字
+                }
+
+                m();
+                function m(){
+                    var prop = (new Date() - sTime)/time;
+                    prop >= 1?prop = 1:requestAnimationFrame(m);
+                    for (var key in mJson) {
+                        if ( key === "opacity" ){
+                            var o = sVal[key] + prop*(tVal[key] - sVal[key]);
+                            obj.style[key] = o;
+                            obj.style.filter = "alpha(opacity="+ 100*o +")";
+                        }else{
+                            obj.style[key] = sVal[key] + prop*(tVal[key] - sVal[key]) + "px";
+                        }
+                    }
+                    if ( prop === 1 ){
+                        callBack && callBack.call(obj);
+                    }
+                }
+                function getStyle(obj , atr) {
+                    return obj.currentStyle?obj.currentStyle[atr]:getComputedStyle(obj)[atr];
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

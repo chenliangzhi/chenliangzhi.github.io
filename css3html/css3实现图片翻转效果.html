@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3图片翻转效果</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{list-style: none;}
+		a,img{display: block;}
+		input,button{outline: none;}
+		textarea{resize: none;}
+		.box{
+			position: relative;
+			width: 120px;
+			height: 120px;
+			text-align: center;
+			line-height: 120px;
+			border: 1px solid #ccc;
+		}
+		.div1{
+			position: absolute;
+			background:#f60;
+			width: 120px;
+			height: 120px;
+			color: #000;
+			opacity: 1; 
+				 -o-transform: translateZ(0);
+			   -moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+			-webkit-transform: translateZ(0);
+				 	transform: translateZ(0);
+			-webkit-transform: rotateY(0deg);
+			   -moz-transform: rotateY(0deg);
+				 -o-transform: rotateY(0deg);
+				-ms-transform: rotateY(0deg);
+					transform: rotateY(0deg);
+				-o-transition: all .4s linear;
+			  -moz-transition: all .4s linear;
+		   -webkit-transition: all .4s linear;
+			   -ms-transition: all .4s linear;
+				   transition: all .4s linear;
+
+		}
+		.div2{
+			width: 120px;
+			height: 120px;
+			display: block;
+			position: absolute;
+			background: pink;	z-index: 1; color: red; 
+			opacity: 0;
+			 	-webkit-transform: translateZ(0);
+				   -moz-transform: translateZ(0);
+				     -o-transform: translateZ(0);
+				    -ms-transform: translateZ(0);
+				        transform: translateZ(0);
+				-webkit-transform: rotateY(-180deg);
+				   -moz-transform: rotateY(-180deg);
+					 -o-transform: rotateY(-180deg);
+					-ms-transform: rotateY(-180deg);
+						transform: rotateY(-180deg);
+			   -webkit-transition: all .4s linear;
+				  -moz-transition: all .4s linear;
+				    -o-transition: all .4s linear;
+				   -ms-transition: all .4s linear;
+					   transition: all .4s linear;
+		}
+
+		.box:hover .div1{
+			opacity: 0;	z-index: 1; 
+			display: block;
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			-o-transform: rotateY(180deg);
+			-ms-transform: rotateY(180deg);
+			transform: rotateY(180deg);
+		}
+		.box:hover .div2{ 
+			opacity: 1.0;
+			-webkit-transform: rotateY(0deg);
+			-moz-transform: rotateY(0deg);
+			-o-transform: rotateY(0deg);
+			-ms-transform: rotateY(0deg);
+			transform: rotateY(0deg);
+		}
+
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="div1">123123</div>
+		<div class="div2">abcddfds</div>
+	</div>
+</body>
+</html>

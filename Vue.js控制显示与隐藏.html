@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>Title</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+    </style>
+</head>
+<body>
+    <div id="box" v-show="seen">
+        虽然根据基金持仓套利有点不靠谱，但在这里还是把“雄安”概念基金给大家汇总下，以供参考。各家券商对这些个股集体看好：金隅股份、华夏幸福、冀东水泥、先河环保、河钢股份、京汉股份、荣盛发展、北京城建。
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        var app  = new Vue({
+            el:'#box',
+            data:{
+                seen:true  //当为false时，文字隐藏;为true时，文字显示
+            }
+        })
+    </script>
+</body>
+</html>

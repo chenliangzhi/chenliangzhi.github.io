@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>广告切换</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+    </style>
+</head>
+<body>
+<div id="banner_main">
+    <div id="banner">
+        <script language =javascript >
+            var curIndex=0;
+            //时间间隔 单位毫秒
+            var timeInterval=3000;
+
+            var arr =[
+                src = 'images/banner1.jpg',
+                src = 'images/banner2.jpg',
+                src = 'images/banner3.jpg'
+            ];
+
+            setInterval(changeImg,timeInterval);
+            function changeImg()
+            {
+                var obj=document.getElementById("showpic");
+                if (curIndex===arr.length-1)
+                {
+                    curIndex=0;
+                }
+                else
+                {
+                    curIndex+=1;
+                }
+                obj.src=arr[curIndex];
+            }
+        </script>
+        <img src="images/banner1.jpg" width="668"  height="213" id="showpic" />
+    </div>
+</div>
+</body>
+</html>

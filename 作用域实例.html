@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>作用域实例</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        var a,b;
+        (function () {
+            alert(a); //这是第一个
+            alert(b); //这是第二个
+            var a = b = 3;
+            alert(a); //这是第三个
+            alert(b); //这是第四个
+        })();
+        alert(a);//这是第五个
+        alert(b);//这是第6个
+
+/*
+* 分析：
+* 定义变量 var a;
+*          var b;
+*自执行
+*       定义变量var a;
+*       赋值 b=3;
+*            a =3;
+*       执行第一个弹窗 弹窗undefined;
+*       执行第二个弹窗 弹出undefined；
+*  赋值： b=3;
+*   a =3;
+*   执行第三个弹窗  a=3;
+*   执行第四个弹窗  b=3；
+*   执行第五个弹窗  a=undefined;
+*   执行第六个弹窗  b=3;
+*
+* */
+
+    //答案 undefined;undefined;3;3;undefined;3;
+    </script>
+</body>
+</html>

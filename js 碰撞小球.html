@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="anthony">
+    <meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+    <title>js 碰撞小球</title>
+    <style>
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        .ball{
+            width: 100px;
+            height: 100px;
+
+            border-radius: 50%;
+            background: rgb(0,0,0);
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="ball"></div>
+    </div>
+    <script>
+        (function () {
+            var  oBall = document.querySelector('#box .ball');
+            //var  bgColor = rgb(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255));
+            //var  bgColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
+            //oBall.style.backgroundColor = bgColor();
+
+
+        })();
+    </script>
+</body>
+</html>

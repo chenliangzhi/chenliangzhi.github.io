@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{list-style: none;}
+		a,img{display: block;}
+		input,button{outline: none;}
+		textarea{resize: none;}
+		.wrap{
+			width: 800px;height:390px;margin:50px auto 0;border: 1px solid #ddd;overflow: hidden;position: relative;
+		}
+		.ul1{
+			height:90px;width:700px;background: #cccccc;margin:0 auto;
+		}
+		.ul1 li{
+			float: left;
+			width:86px;
+			text-align: center;
+			height:86px;
+			color: #fff;
+			margin:0 5px;
+			cursor: pointer;
+			border: 2px solid transparent;
+		}
+		.ul1 li img{width: 100%;height:100%;}
+		.ul1 li.active{
+			border: 2px solid #ff6600;
+		}
+		.ul2{
+			background: #dddddd;
+			height: 300px;
+
+		}
+		.ul2 li{
+			height: 300px;
+			text-align: center;
+			color: #333;
+			width: 800px;
+			background: pink;
+			float: left;
+		}
+		.ul2 li img{width: 100%;height: 100%;}
+		.ul3{
+		}
+		.ul3 li{
+			position: absolute;
+			bottom: 0;
+			height: 90px;
+			width: 50px;
+			background: #333;
+			text-align: center;
+			line-height: 90px;
+			color: #fff;
+			font-size: 24px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		.ul3 .prev{
+			left:0;
+		}
+		.ul3 .next{
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<ul class="ul2">
+			<li><img  src="images/banner1.jpg"/></li>
+			<li><img  src="images/banner2.jpg"/></li>
+			<li><img  src="images/banner3.jpg"/></li>
+			<li><img  src="images/banner4.jpg"/></li>
+			<li><img  src="images/banner5.jpg"/></li>
+			<li><img  src="images/banner6.jpg"/></li>
+			<li><img  src="images/banner7.jpg"/></li>
+		</ul>
+		<ul class="ul1">
+			<li class="active"><img  src="images/01.jpg"/></li>
+			<li><img  src="images/02.jpg"/></li>
+			<li><img  src="images/03.jpg"/></li>
+			<li><img  src="images/04.jpg"/></li>
+			<li><img  src="images/05.jpg"/></li>
+			<li><img  src="images/06.jpg"/></li>
+			<li><img  src="images/07.jpg"/></li>
+		</ul>
+		<ul class="ul3">
+			<li class="prev">&lt;</li>
+			<li class="next">&gt;</li>
+		</ul>
+	</div>
+	<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript">
+		!(function () {
+			var oli2 = $('.ul2 li'),
+				oW = oli2.width(),    //定义banner li的宽度
+				length = oli2.length, //定义banner li的length
+				oUlWidth = $(".ul2").width(length*oW), //定义banner 这个ul的宽度
+				timer = null,
+            	index = 0;
+
+			//点击下标小图片
+            $('.ul1 li').on('click',function () {
+				var index= $(this).index();
+                $('.ul2').stop().animate({
+                    marginLeft:-index*oW +"px"
+                },500);
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+
+			//开始动画
+			function start() {
+				timer = setInterval(function () {
+                    index++;
+                    if(index>=length){
+                        index = 0;
+                    }
+                    $('.ul1 li').eq(index).addClass('active').siblings().removeClass('active');
+
+                    $('.ul2').stop().animate({
+                        marginLeft:-index*oW +"px"
+                    },500);
+
+                },5000);
+            }
+            //停止动画
+            function  stop() {
+                clearInterval(timer);
+            }
+
+            //右边按钮
+            $('.next').on('click',function (){
+
+                index++;
+                if(index>=length) {
+                    index = 0;
+                }
+
+                $('.ul1 li').eq(index).addClass('active').siblings().removeClass('active');
+
+                $('.ul2').stop().animate({
+                    marginLeft:-index*oW +"px"
+                },500);
+            });
+
+            //左边按钮
+			$('.prev').click(function () {
+                index--;
+                if(index<0){
+                    index =length-1;
+                }
+                $('.ul1 li').eq(index).addClass('active').siblings().removeClass('active');
+
+                $('.ul2').stop().animate({
+                    marginLeft:-index*oW +"px"
+                },500);
+            });
+
+            //鼠标移上最外层动画停止，离开继续动画
+            $('.wrap').hover(function () {
+                stop();
+            },function () {
+				start();
+            });
+            start(); //执行动画
+        })();
+	</script>
+</body>
+</html>

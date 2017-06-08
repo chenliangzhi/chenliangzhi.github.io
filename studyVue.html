@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="anthony">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0}
+        table,td{
+            border:1px solid #cccccc;
+            border-collapse:collapse;
+        }
+        table{
+            width:1090px;
+            margin:20px auto;
+        }
+        tr{
+            line-height:30px;
+        }
+        td{
+            text-align:center;
+        }
+        button{
+            width:40px;
+            height:24px;
+            border: 1px solid orange;
+            cursor: pointer;
+        }
+        fieldset{
+            width: 1040px; margin:30px auto;padding:25px;
+        }
+        fieldset p{
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <fieldset>
+        <legend>添加新书</legend>
+        <p>书名：<input type="text" v-model='newBook.name'/></p>
+        <p>作者：<input type="text" v-model='newBook.author'/></p>
+        <p>价格：<input type="text" v-model='newBook.price'/></p>
+        <p><button @click="addBook">添加</button></p>
+    </fieldset>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>书名</td>
+            <td>作者</td>
+            <td>价格</td>
+            <td>操作</td>
+        </tr>
+        <tr v-for="(book,index) in books">
+            <td>{{book.id}}</td>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.price}}</td>
+            <td>
+                <button @click="delBook(index)">删除</button>
+            </td>
+        </tr>
+    </table>
+
+</div>
+    <script src="js/vue.js"></script>
+    <script>
+         var app = new Vue({
+             el:'#demo',
+             data:{
+                 books:[
+                     {id:1, name:'红楼梦', author:'曹雪芹',price:'8.88'},
+                     {id:2, name:'西游记', author:'吴承恩',price:'8.86'},
+                     {id:3, name:'水浒传', author:'施耐庵',price:'8.68'},
+                     {id:4, name:'三国演义', author:'罗贯中',price:'6.68'},
+                 ],
+                 newBook:{
+                     id:0,
+                     name: '',
+                     author:'',
+                     price:''
+                 }
+             },
+             methods:{
+                 delBook:function (idx) {
+                     this.books.splice(idx,1);
+                 },
+                 addBook:function () {
+                     var maxId = 0;
+                     for(var i =0; i<this.books.length;i++){
+                         if(maxId<this.books[i].id){
+                             maxId = this.books[i].id;
+                         }
+                     }
+                     this.newBook.id = maxId+1;
+                     console.log(this.newBook.id);
+                     // 插入到books中
+                     this.books.push(this.newBook);
+                     //清空input的值
+                     this.newBook = {};
+                 }
+             }
+         });
+    </script>
+</body>
+</html>

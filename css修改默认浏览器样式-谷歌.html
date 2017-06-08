@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="anthony">
+    <meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+    <title>Title</title>
+    <style>
+        /*
+        网页强制出现浏览器的滚动条
+        body{
+            overflow:scroll;
+
+        }*/
+        *{ margin: 0; padding: 0; font-family:Microsoft yahei,serif;}
+        li{ list-style:none;}
+        body{
+            overflow:scroll;
+            overflow-x:hidden;
+            height: 2000px;
+            scrollbar-arrow-color: #f60;
+
+        }
+
+
+      /*  ::-webkit-scrollbar-track-piece {
+            background-color:#f5f5f5;
+            border-left:1px solid #d2d2d2;
+        }
+        ::-webkit-scrollbar {
+            width:10px;
+            height:10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color:#c2c2c2;
+            background-clip:padding-box;
+            border:1px solid #979797;
+            min-height:28px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            border:1px solid #636363;
+            background-color:#aaa;
+        }*/
+        #box{
+           
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+      
+    </div>
+    <script>
+        (function () {
+            document.body.style.scrollbarArrowColor="green";
+        })();
+
+    </script>
+</body>
+</html>

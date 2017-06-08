@@ -1,0 +1,102 @@
+
+.subnav{width:50px; height: 100%;position: fixed;top: 0;left: 0;background: #063868;z-index: 9999}
+.ul{}
+.ul li{
+    position: relative;
+    margin-bottom: 10px;height:48px;
+    text-align: center;
+    cursor: pointer;
+    line-height:48px;
+    border-top:1px solid transparent;
+    border-bottom:1px solid transparent;
+
+}
+.ul li:hover{background: #fff;border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;}
+.ul li i{ font-size:24px; }
+.ul li i.icon-weibiaoti2{ color: #f60; }
+.ul li i.qq{ color: #297fd6; }
+.ul li i.weibo{ color:#f3262b; }
+.ul li i.youjian{ color:#88c78b; }
+.ul li i.weixin{ color:#a5ce42; }
+.ul li i.zhifubao{ color:#009fe8; }
+.ul li i.contact{ color:#ff9680; }
+.ul li i.icon-qingchuhuancun{ color:#1daef2; }
+.hide{position:absolute;left:50px;top:-1px;display:none;border: 1px solid transparent;width: 200px; height:200px;background: #fff;}
+.hide img{width: 100%;height: 100%;}
+.right-box{
+    position: absolute;right: 0;bottom: 0;left:50px;
+    top:0;
+    height: 100%;
+    background: #ccc;
+    min-width: 700px;
+}
+.right-box .head-top{
+    height: 50px; background: #063868;
+}
+.head-top .logo-btn{
+    float: left;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+    color: #fff;
+    cursor: pointer;
+}
+.head-top .logo-btn i{vertical-align: middle; height: 50px;width: 50px;display: block;font-size: 24px;color: #fff;transition: 0.5s;
+    -webkit-transition:0.5s;}
+.head-top .logo-btn i.active{
+    transform:rotate(90deg);
+    -webkit-transform:rotate(90deg);
+}
+.search{
+    float: left;
+    width: 200px;
+    height:30px;
+    border: 1px solid #a1a1a1;
+    margin-top:9px;
+    border-radius:4px;
+}
+.search input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius:4px;
+    text-indent:8px;
+    background: transparent;
+}
+.search input:focus{
+    color: #fff;
+}
+.nav-top{
+    height: 50px;
+    float: right;
+    margin-right: 20px;
+}
+.nav-top li{
+    height: 100%;
+    float: left;
+    line-height: 50px;
+    cursor: pointer;
+    text-align: center;
+
+}
+.nav-top li a{
+    color: #fff;height: 100%; width:80px;
+    font-size: 16px;
+    display: block;padding: 0 4px;
+
+}
+.nav-top li a:hover,.nav-top li a.active{
+    background: #f60;
+}
+
+.copyright{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    background: #999;
+    text-align: center;
+}
